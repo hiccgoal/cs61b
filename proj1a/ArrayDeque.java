@@ -98,7 +98,6 @@ public class ArrayDeque<T> {
             }
         }
     }
-
     private boolean isFull() {
         return capacity - 1 == size();
     }
