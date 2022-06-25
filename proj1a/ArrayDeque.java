@@ -46,7 +46,7 @@ public class ArrayDeque<T> {
             for (int i = left; i < right; i++) {
                 System.out.print(items[i] + " ");
             }
-        } else if(left > right){
+        } else if (left > right) {
             for (int i = left; i < capacity; i++) {
                 System.out.print(items[i] + " ");
             }
@@ -57,41 +57,41 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return null;
         }
         T res = items[left];
         items[left] = null;
         left = (left + 1) % capacity;
-        if(isLowUsageRate()) {
+        if (isLowUsageRate()) {
             resize(capacity / 2);
         }
         return res;
     }
 
     public T removeLast() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return null;
         }
         right = (right - 1 + capacity) % capacity;
         T res = items[right];
         items[right] = null;
-        if(isLowUsageRate()) {
+        if (isLowUsageRate()) {
             resize(capacity / 2);
         }
         return res;
     }
 
     public T get(int index) {
-        if(index < 0 || index >= size()) {
+        if (index < 0 || index >= size()) {
             return null;
         }
-        if(isEmpty()) {
+        if (isEmpty()) {
             return null;
-        } else if(right > left) {
+        } else if (right > left) {
             return items[left + index];
-        } else{
-            if(index + left < capacity) {
+        } else {
+            if (index + left < capacity) {
                 return items[index + left];
             } else {
                 return items[(index + left) % capacity];
@@ -108,9 +108,9 @@ public class ArrayDeque<T> {
         T[] newArray = (T[]) new Object[newSize];
         if (right > left) {
             System.arraycopy(items, left, newArray, 0, size);
-        } else if(left > right) {
+        } else if (left > right) {
             System.arraycopy(items, left, newArray, 0, capacity - left);
-            System.arraycopy(items, 0, newArray, capacity-left, size + left - capacity);
+            System.arraycopy(items, 0, newArray, capacity - left, size + left - capacity);
         }
         left = 0;
         right = size;
@@ -119,7 +119,7 @@ public class ArrayDeque<T> {
     }
 
     private boolean isLowUsageRate() {
-        return capacity >= 16 && (double)size() / capacity < 0.25;
+        return capacity >= 16 && (double) size() / capacity < 0.25;
     }
 
 //    public static void main(String[] args) {
