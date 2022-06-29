@@ -3,6 +3,20 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class IntListTest {
+    /**
+     * Returns the reverse of the given IntList.
+     * This method is destructive. If given null
+     * as an input, returns null.
+     */
+    @Test
+    public void testReverse() {
+        IntList L = IntList.of(1, 2, 3);
+//        我的测试案例写错了
+//        IntList.reverse(L);
+//        assertEquals(IntList.of(3, 2, 1), L);
+        assertEquals(IntList.of(3, 2, 1), IntList.reverse(L));
+        assertNull(IntList.reverse(null));
+    }
 
     /**
      * Example test that verifies correctness of the IntList.of static
