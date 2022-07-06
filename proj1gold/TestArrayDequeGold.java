@@ -3,54 +3,55 @@ import org.junit.Test;
 
 public class TestArrayDequeGold {
     @Test
-    public void testStudentArrayDeque() {
-        StudentArrayDeque<Integer> testArray = new StudentArrayDeque<>();
-        ArrayDequeSolution<Integer> stdArray = new ArrayDequeSolution<>();
-        String log = "";
-        for (int i = 0; i < 1000; i++) {
-            if (stdArray.size() == 0) {
-                int addNumber = StdRandom.uniform(1000);
-                int headOrBack = StdRandom.uniform(2);
-                if (headOrBack == 0) {
-                    log = log + "addFirst(" + addNumber + ")\n";
-                    testArray.addFirst(addNumber);
-                    stdArray.addFirst(addNumber);
-                } else {
-                    log = log + "addLast(" + addNumber + ")\n";
-                    testArray.addLast(addNumber);
-                    stdArray.addLast(addNumber);
+    public void test() {
+        StudentArrayDeque<Integer> sad = new StudentArrayDeque<>();
+        ArrayDequeSolution<Integer> ads = new ArrayDequeSolution<>();
+
+        StringBuilder msg = new StringBuilder();
+
+        int s = 0;
+        for (int i = 0; i < 500; i++) {
+            if (i % 5 == 0) {
+                msg.append("size()\n");
+                assertEquals(msg.toString(), ads.size(), sad.size());
+            }
+
+            double selector = StdRandom.uniform();
+            if (selector < 0.25) {
+                sad.addFirst(i);
+                ads.addFirst(i);
+                s++;
+                msg.append("addFirst(" + i + ")\n");
+                assertEquals(msg.toString(), ads.get(0), sad.get(0));
+            } else if (selector < 0.5) {
+                sad.addLast(i);
+                ads.addLast(i);
+                s++;
+                msg.append("addLast(" + i + ")\n");
+                assertEquals(msg.toString(), ads.get(s - 1), sad.get(s - 1));
+            } else if (selector < 0.75) {
+                if (ads.isEmpty()) {
+                    msg.append("isEmpty()\n");
+                    assertTrue(msg.toString(), sad.isEmpty());
+                    continue;
                 }
+                Integer x = ads.removeFirst();
+                Integer y = sad.removeFirst();
+                s--;
+                msg.append("removeFirst()\n");
+                assertEquals(msg.toString(), x, y);
             } else {
-                int x = StdRandom.uniform(4);
-                int addNumber = StdRandom.uniform(1000);
-                Integer testremoveNumber = 1;
-                Integer stdremoveNumber = 1;
-                switch (x) {
-                    case 0:
-                        log = log + "addFirst(" + addNumber + ")\n";
-                        testArray.addFirst(addNumber);
-                        stdArray.addFirst(addNumber);
-                        break;
-                    case 1:
-                        log = log + "addLast(" + addNumber + ")\n";
-                        testArray.addLast(addNumber);
-                        stdArray.addLast(addNumber);
-                        break;
-                    case 2:
-                        log = log + "removeFirst()\n";
-                        testremoveNumber = testArray.removeFirst();
-                        stdremoveNumber = stdArray.removeFirst();
-                        break;
-                    case 3:
-                        log = log + "removeLast()\n";
-                        testremoveNumber = testArray.removeLast();
-                        stdremoveNumber = stdArray.removeLast();
-                        break;
-                    default:
+                if (ads.isEmpty()) {
+                    msg.append("isEmpty()\n");
+                    assertTrue(msg.toString(), sad.isEmpty());
+                    continue;
                 }
-                assertEquals(log, stdremoveNumber, testremoveNumber);
+                Integer x = ads.removeLast();
+                Integer y = sad.removeLast();
+                s--;
+                msg.append("removeLast()\n");
+                assertEquals(msg.toString(), x, y);
             }
         }
-
     }
 }
