@@ -13,41 +13,45 @@ public class TestArrayDequeGold {
 
         int elemNum = 0;
         for (int i = 0; i < testNum; i++) {
+            if (i % 5 == 0) {
+                msg.append("size()\n");
+                assertEquals(msg.toString(), b.size(), a.size());
+            }
             double randomNum = StdRandom.uniform();
             if (randomNum < 0.25) {
                 a.addFirst(i);
                 b.addFirst(i);
                 elemNum ++;
                 msg.append("addFirst(" + i + ")\n");
-                assertEquals(msg.toString(), a.get(0), b.get(0));
+                assertEquals(msg.toString(), b.get(0), a.get(0));
             } else if (randomNum < 0.5) {
                 a.addLast(i);
                 b.addLast(i);
                 elemNum ++;
                 msg.append("addLast(" + i + ")\n");
-                assertEquals(msg.toString(), a.get(elemNum - 1), b.get(elemNum - 1));
+                assertEquals(msg.toString(), b.get(elemNum - 1), a.get(elemNum - 1));
             } else if (randomNum < 0.75) {
-                if (a.isEmpty()) {
+                if (b.isEmpty()) {
                     msg.append("isEmpty()\n");
-                    assertTrue(msg.toString(), b.isEmpty());
+                    assertTrue(msg.toString(), a.isEmpty());
                     continue;
                 }
                 Integer A = a.removeFirst();
                 Integer B = b.removeFirst();
                 elemNum --;
                 msg.append("RemoveFirst()\n");
-                assertEquals(msg.toString(), A, B);
+                assertEquals(msg.toString(), B, A);
             } else {
-                if (a.isEmpty()) {
+                if (b.isEmpty()) {
                     msg.append("isEmpty()\n");
-                    assertTrue(msg.toString(), b.isEmpty());
+                    assertTrue(msg.toString(), a.isEmpty());
                     continue;
                 }
                 Integer A = a.removeLast();
                 Integer B = b.removeLast();
                 elemNum --;
                 msg.append("RemoveLast()\n");
-                assertEquals(msg.toString(), A, B);
+                assertEquals(msg.toString(), B, A);
             }
         }
     }
