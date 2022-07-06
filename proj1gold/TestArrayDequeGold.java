@@ -2,55 +2,54 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TestArrayDequeGold {
+    private int testNum = 300;
     @Test
     public void test() {
-        StudentArrayDeque<Integer> sad = new StudentArrayDeque<>();
-        ArrayDequeSolution<Integer> ads = new ArrayDequeSolution<>();
-
+        StudentArrayDeque<Integer> testArray = new StudentArrayDeque<>();
+        ArrayDequeSolution<Integer> stdArray = new ArrayDequeSolution<>();
         StringBuilder msg = new StringBuilder();
+        int elemNum = 0;
 
-        int s = 0;
-        for (int i = 0; i < 500; i++) {
-            if (i % 5 == 0) {
-                msg.append("size()\n");
-                assertEquals(msg.toString(), ads.size(), sad.size());
-            }
-
-            double selector = StdRandom.uniform();
-            if (selector < 0.25) {
-                sad.addFirst(i);
-                ads.addFirst(i);
-                s++;
+        for (int i = 0; i < testNum; i++) {
+//            if (i % 5 == 0) {
+//                msg.append("size()\n");
+//                assertEquals(msg.toString(), stdArray.size(), testArray.size());
+//            }
+            double flag = StdRandom.uniform();
+            if (flag < 0.25) {
+                testArray.addFirst(i);
+                stdArray.addFirst(i);
                 msg.append("addFirst(" + i + ")\n");
-                assertEquals(msg.toString(), ads.get(0), sad.get(0));
-            } else if (selector < 0.5) {
-                sad.addLast(i);
-                ads.addLast(i);
-                s++;
+                elemNum ++;
+                assertEquals(msg.toString(), stdArray.get(0), testArray.get(0));
+            } else if (flag < 0.5) {
+                testArray.addLast(i);
+                stdArray.addLast(i);
                 msg.append("addLast(" + i + ")\n");
-                assertEquals(msg.toString(), ads.get(s - 1), sad.get(s - 1));
-            } else if (selector < 0.75) {
-                if (ads.isEmpty()) {
+                elemNum ++;
+                assertEquals(msg.toString(), stdArray.get(elemNum - 1), testArray.get(elemNum - 1));
+            } else if (flag < 0.75) {
+                if (stdArray.isEmpty()) {
                     msg.append("isEmpty()\n");
-                    assertTrue(msg.toString(), sad.isEmpty());
+                    assertTrue(msg.toString(), testArray.isEmpty());
                     continue;
                 }
-                Integer x = ads.removeFirst();
-                Integer y = sad.removeFirst();
-                s--;
+                Integer testElem = testArray.removeFirst();
+                Integer stdElem = stdArray.removeFirst();
                 msg.append("removeFirst()\n");
-                assertEquals(msg.toString(), x, y);
+                elemNum --;
+                assertEquals(msg.toString(), stdElem, testElem);
             } else {
-                if (ads.isEmpty()) {
+                if (stdArray.isEmpty()) {
                     msg.append("isEmpty()\n");
-                    assertTrue(msg.toString(), sad.isEmpty());
+                    assertTrue(msg.toString(), testArray.isEmpty());
                     continue;
                 }
-                Integer x = ads.removeLast();
-                Integer y = sad.removeLast();
-                s--;
+                Integer testElem = testArray.removeLast();
+                Integer stdElem = stdArray.removeLast();
                 msg.append("removeLast()\n");
-                assertEquals(msg.toString(), x, y);
+                elemNum --;
+                assertEquals(msg.toString(), stdElem, testElem);
             }
         }
     }
