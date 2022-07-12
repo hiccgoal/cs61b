@@ -80,7 +80,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         return new ArrayRingBufferIterator();
     }
 
-    public class ArrayRingBufferIterator implements Iterator<T> {
+    private class ArrayRingBufferIterator implements Iterator<T> {
         private int pos;
         private int num;
 
@@ -105,11 +105,11 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     }
 
     // TODO: When you get to part 5, implement the needed code to support iteration.
-    public void print() {
-        for(int i = 0; i < capacity; i++) {
-            System.out.println(rb[i]);
-        }
-    }
+//    public void print() {
+//        for(int i = 0; i < capacity; i++) {
+//            System.out.println(rb[i]);
+//        }
+//    }
 
 
 //    public static void main(String[] args) {
