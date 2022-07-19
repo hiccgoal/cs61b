@@ -42,7 +42,7 @@ public class Percolation {
             return;
         }
         flagOpen[row][col] = true;
-        numOpen ++;
+        numOpen++;
         unionOpenNeighbor(row, col, row + 1, col);
         unionOpenNeighbor(row, col, row - 1, col);
         unionOpenNeighbor(row, col, row, col + 1);
@@ -73,17 +73,17 @@ public class Percolation {
         return sites.connected(bottomSite, topSite);
     }
 
-    public int xyTo1D(int row, int column) {
+    private int xyTo1D(int row, int column) {
         return row * N + column;
     }
 
-    public void validRange(int row, int column) {
+    private void validRange(int row, int column) {
         if (row < 0 || row >= N || column < 0 || column >= N) {
             throw new IndexOutOfBoundsException();
         }
     }
 
-    public void unionOpenNeighbor(int row, int col, int newRow, int newCol) {
+    private void unionOpenNeighbor(int row, int col, int newRow, int newCol) {
         if (newRow < 0 || newRow >= N || newCol < 0 || newCol >= N) {
             return;
         }

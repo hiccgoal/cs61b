@@ -16,7 +16,7 @@ public class PercolationStats {
         openSiteFractions = new double[T];
         for (int i = 0; i < T; i++) {
             Percolation percolation = pf.make(N);
-            while(!percolation.percolates()) {
+            while (!percolation.percolates()) {
                 int x = StdRandom.uniform(N);
                 int y = StdRandom.uniform(N);
                 while (percolation.isOpen(x, y)) {
